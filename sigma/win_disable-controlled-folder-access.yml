@@ -1,0 +1,33 @@
+title: Disabling Controlled Folder Access Feature of Windows Defender
+id: 22164734-bc16-4732-abda-9d621cc22ec0
+description: Controlled Folder Access can fairly limit an adversary from accessing secured folders. However, the actor might disable the feature entirely if privileges are available.
+author: Syed Hasan
+date: 2021/01/21
+modified: 2021/01/21
+version: 1.0
+references:
+    - https://docs.microsoft.com/en-us/windows/security/threat-protection/microsoft-defender-atp/enable-controlled-folders#powershell
+status: experimental
+tags:
+    - controlled-folder
+    - ransomware
+logsource:
+    product: windows
+    service: powershell
+    definition: 'Script block logging must be enabled'
+detection:
+    block:
+        ScriptBlockText|contains|all:
+            - Set-MpPreference 
+            - EnableControlledFolderAccess 
+            - Enabled
+    command:
+        EventID: 4104
+        keywords|contains|all:
+            - Set-MpPreference 
+            - EnableControlledFolderAccess 
+            - Enabled      
+    condition: command or block
+falsepositives: 
+  - Unknown
+level: high
