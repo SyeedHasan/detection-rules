@@ -18,16 +18,16 @@ logsource:
 detection:
     block:
         ScriptBlockText|contains|all:
-            - Set-MpPreference 
-            - EnableControlledFolderAccess 
-            - Enabled
+            - Set-MpPreference
+            - EnableControlledFolderAccess
+            - Disabled
     command:
         EventID: 4104
         keywords|contains|all:
-            - Set-MpPreference 
-            - EnableControlledFolderAccess 
-            - Enabled      
+            - Set-MpPreference
+            - EnableControlledFolderAccess
+            - Disabled
     condition: command or block
-falsepositives: 
+falsepositives:
   - Unknown
 level: high
